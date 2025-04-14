@@ -35,6 +35,23 @@ int main() {
     // 0 0 1 0 0
     // 1 1 1 1 1
     // 0 0 1 0 0
+    //criei a matriz de tamanho 10x10
+    int matriz[10][10];
+    //atribuindo valores a espaços dessa matriz
+    matriz[0][0] = 1;
+    matriz[0][1] = 2;
+    matriz[0][2] = 3;
+    matriz[1][0] = 1;
+    matriz[1][1] = 2;
+    matriz[1][2] = 3;
+    
+   //printando os valores
+    for(int i = 0; i < 3; i++){
+        printf("%d \n",matriz[0][i]);
+    }
+    for(int j = 0; j < 3; j++){
+        printf("%d \n",matriz[0][j]);
+    }
 
     return 0;
 }
