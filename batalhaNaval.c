@@ -1,57 +1,80 @@
 #include <stdio.h>
+#include <string.h> // Necessário para memset
 
-// Desafio Batalha Naval - MateCheck
-// Este código inicial serve como base para o desenvolvimento do sistema de Batalha Naval.
-// Siga os comentários para implementar cada parte do desafio.
+// Função separada para imprimir a matriz (opcional, mas organizado)
+void imprimirMatrizFormatada(int mat[10][10]) {
+    int i, j;
+    printf("{\n"); // Imprime a chave de abertura e começa na nova linha
+
+    for (i = 0; i < 10; i++) { // Loop para as linhas
+        printf("  "); // Adiciona uma pequena indentação para cada linha
+
+        for (j = 0; j < 10; j++) { // Loop para as colunas
+            printf("%d", mat[i][j]); // Imprime o valor do elemento
+
+            // Adiciona uma vírgula APENAS se NÃO for o último elemento da linha
+            if (j < 9) {
+                printf(",");
+            }
+        }
+
+        // Adiciona uma quebra de linha APENAS se NÃO for a última linha da matriz
+        if (i < 9) {
+             printf("\n");
+        } else {
+             // Adiciona a quebra de linha final antes da chave de fechamento
+             printf("\n");
+        }
+    }
+
+    printf("}\n"); // Imprime a chave de fechamento na sua própria linha
+}
 
 int main() {
-    // Nível Novato - Posicionamento dos Navios
-    // Sugestão: Declare uma matriz bidimensional para representar o tabuleiro (Ex: int tabuleiro[5][5];).
-    // Sugestão: Posicione dois navios no tabuleiro, um verticalmente e outro horizontalmente.
-    // Sugestão: Utilize `printf` para exibir as coordenadas de cada parte dos navios.
 
-    // Nível Aventureiro - Expansão do Tabuleiro e Posicionamento Diagonal
-    // Sugestão: Expanda o tabuleiro para uma matriz 10x10.
-    // Sugestão: Posicione quatro navios no tabuleiro, incluindo dois na diagonal.
-    // Sugestão: Exiba o tabuleiro completo no console, mostrando 0 para posições vazias e 3 para posições ocupadas.
-
-    // Nível Mestre - Habilidades Especiais com Matrizes
-    // Sugestão: Crie matrizes para representar habilidades especiais como cone, cruz, e octaedro.
-    // Sugestão: Utilize estruturas de repetição aninhadas para preencher as áreas afetadas por essas habilidades no tabuleiro.
-    // Sugestão: Exiba o tabuleiro com as áreas afetadas, utilizando 0 para áreas não afetadas e 1 para áreas atingidas.
-
-    // Exemplos de exibição das habilidades:
-    // Exemplo para habilidade em cone:
-    // 0 0 1 0 0
-    // 0 1 1 1 0
-    // 1 1 1 1 1
-    
-    // Exemplo para habilidade em octaedro:
-    // 0 0 1 0 0
-    // 0 1 1 1 0
-    // 0 0 1 0 0
-
-    // Exemplo para habilidade em cruz:
-    // 0 0 1 0 0
-    // 1 1 1 1 1
-    // 0 0 1 0 0
-    //criei a matriz de tamanho 10x10
     int matriz[10][10];
-    //atribuindo valores a espaços dessa matriz
-    matriz[0][0] = 1;
-    matriz[0][1] = 2;
-    matriz[0][2] = 3;
-    matriz[1][0] = 1;
-    matriz[1][1] = 2;
-    matriz[1][2] = 3;
-    
-   //printando os valores
-    for(int i = 0; i < 3; i++){
-        printf("%d \n",matriz[0][i]);
-    }
-    for(int j = 0; j < 3; j++){
-        printf("%d \n",matriz[0][j]);
-    }
 
+    int escolha;
+    int escolha2;
+    
+    int valorX;
+    int valorY;
+    
+    // Preenche o bloco de memória ocupado pela matriz com zeros
+    // memset(ponteiro_para_memoria, valor_byte, numero_de_bytes);
+    memset(matriz, 0, sizeof(matriz));
+    do{
+        printf("Digite o valor X: ");
+        scanf("%d",&valorX);
+        printf("Digite o valor Y: ");
+        scanf("%d",&valorY);
+        
+        if(matriz[valorX][valorY] == 0)
+        {
+        if(valorX <= valorY)
+        {
+            
+        for(int i = valorX; i <= valorY; i++){
+            matriz[i][valorY] = matriz[i][valorY] + 10;
+            printf("O valor referente a matriz[%d][%d] = %d\n", i, valorY, matriz[i][valorY]);
+           
+        }
+        }else if (valorX >= valorY && matriz[valorX][valorY] == 0){
+            for(int i = valorY; i <= valorX; i++){
+            matriz[i][valorX] = matriz[i][valorX] + 10;
+            printf("O valor referente a matriz[%d][%d] = %d\n", i, valorX, matriz[i][valorX]);
+           
+        }
+        }
+        }else{
+            printf("Local já preenchido \n");
+        }
+        printf("Se quer continua digite 1 !");
+        scanf("%d",&escolha);
+    }while(escolha == 1);
+ // --- IMPRIMINDO A MATRIZ FINAL ---
+    printf("\n--- Estado final da Matriz --- \n");
+    imprimirMatrizFormatada(matriz); // Chama a função para imprimir
+    
     return 0;
 }
